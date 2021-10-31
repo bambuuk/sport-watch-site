@@ -7,6 +7,22 @@
             align-items: center;
         }
     }
+    .consultation {
+        .consultation__descr {
+            padding-left: 10px;
+            line-height: 20px;
+        }
+        .title {
+            &_left {
+                font-size: 30px;
+                line-height: 40px;
+                padding-left: 10px;
+            }
+        }
+        .feed-form {
+            padding-left: 10px;
+        }
+    }
 }
 @media (max-width: 768px) {
     .header {
@@ -41,6 +57,22 @@
             h3 {
                 margin: 20px 0 10px 0;
             }
+        }
+    }
+    .consultation {
+        .consultation__descr {
+            font-size: 15px;
+            line-height: 15px;
+        }
+        .title {
+            &_left {
+                font-size: 20px;
+                line-height: 25px;
+                padding-left: 10px;
+            }
+        }
+        .feed-form {
+            padding-left: 10px;
         }
     }
 }
@@ -82,8 +114,21 @@
         }
     }
     .benefits {
-        &__header {
+        .title {
             font-size: 25px;
+        }
+    }
+    .consultation {
+        .consultation__descr {
+            font-size: 13px;
+            line-height: 15px;
+        }
+        .title {
+            &_left {
+                font-size: 14px;
+                line-height: 20px;
+                padding-left: 10px;
+            }
         }
     }
 }
