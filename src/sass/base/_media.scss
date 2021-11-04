@@ -160,4 +160,12 @@
             }
         }
     }
+    .carousel {
+        .prev, .next {
+            img {
+                width: 25px;
+                height: 40px;
+            }
+        }
+    }
 }
