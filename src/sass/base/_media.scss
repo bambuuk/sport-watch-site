@@ -1,13 +1,16 @@
 @media (max-width: 1199px) {
     .carousel {
         .prev, .next {
-            position: absolute;
-            top: -40px;
-            left: 45%;
+            left: -10px;
         }
         .next {
-            right: 40%;
+            right: -10px;
             left: auto;
+        }
+        &__inner {
+            img {
+                width: 80%;
+            }
         }
     }
 }
@@ -35,6 +38,25 @@
         }
         .feed-form {
             padding-left: 10px;
+        }
+    }
+    .carousel {
+        .prev, .next {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+            left: auto;
+        }
+        &__inner {
+            img {
+                width: 70%;
+            }
+        }
+    }
+    .catalog {
+        &__content {
+            justify-content: space-around;
         }
     }
 }
@@ -102,6 +124,15 @@
             padding-left: 10px;
         }
     }
+    .catalog {
+        &__tabs {
+            margin-top: 40px;
+        }
+        &__tab {
+            width: 160px;
+            font-size: 16px;
+        }
+    }
 }
 @media (max-width: 575px) {
     .header {
@@ -162,10 +193,27 @@
     }
     .carousel {
         .prev, .next {
-            img {
-                width: 25px;
-                height: 40px;
-            }
+            position: absolute;
+            top: -40px;
+            left: 35%;
+        }
+        .next {
+            right: 35%;
+            left: auto;
+        }
+    }
+    .catalog {
+        &__tabs {
+            margin-top: 30px;
+            flex-direction: column;
+        }
+        &__tab {
+            margin-top: 15px;
+            width: 220px;
+            font-size: 19px;
+        }
+        .title {
+            font-size: 23px;
         }
     }
 }
