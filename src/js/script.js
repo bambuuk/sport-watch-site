@@ -63,13 +63,16 @@ backToContentInfo.forEach((item, i) => {
 
 // Modal window
 const overlay = document.querySelector('.overlay');
+const scroll = calcScroll();
 
 function openModal(modalSelector) {
   const modalWindow = document.querySelector(modalSelector);
   
   modalWindow.style.display = 'block';
   overlay.style.display = 'block';
-  document.body.style.overflow = 'hidden'
+  document.body.style.overflow = 'hidden';
+  document.body.style.marginRight = `${scroll}px`;
+  console.log(scroll);
 }
 
 function closeModal(modalSelector) {
@@ -77,7 +80,8 @@ function closeModal(modalSelector) {
 
   modalWindow.style.display = 'none';
   overlay.style.display = 'none';
-  document.body.style.overflow = ''
+  document.body.style.overflow = '';
+  document.body.style.marginRight = '0px';
 }
 
 function modal(triggerModal, modalSelector) {
@@ -113,6 +117,22 @@ function modal(triggerModal, modalSelector) {
     }
   });
 
+}
+
+// Функиця, которая создаёт отступ справа при вызове модального окна
+function calcScroll() {
+  let div = document.createElement('div');
+
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.overflowY = 'scroll';
+  div.style.visibility = 'hidden';
+
+  document.body.append(div);
+  let scrollWidth = div.offsetWidth - div.clientWidth;
+  div.remove();
+
+  return scrollWidth;
 }
 
 modal('[data-modal="consultation"]', '#consultation');

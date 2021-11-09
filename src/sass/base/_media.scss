@@ -272,4 +272,12 @@
             margin: 0 5px;
         }
     }
+    .modal {
+        width: 320px;
+        padding: 38px 10px 40px 10px;
+        &__close {
+            top: 5px;
+            right: 0px;
+        }
+    }
 }
