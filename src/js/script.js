@@ -1,3 +1,4 @@
+// slider
 const slider = tns({
   container: '.carousel__inner',
   items: 1,
@@ -10,11 +11,13 @@ const slider = tns({
 
 document.querySelector('.prev').addEventListener('click', function () {
   slider.goTo('prev');
-}); 
+});
 
 document.querySelector('.next').addEventListener('click', function () {
   slider.goTo('next');
-}); 
+});
+
+// Catalog item
 
 const tabs = document.querySelectorAll('.catalog__tab');
 const contents = document.querySelectorAll('.catalog__content');
@@ -37,7 +40,7 @@ tabs.forEach((tab, i) => {
     e.target.parentElement.classList.add('catalog__tab_active');
 
     removeAllClass('.catalog__content_active');
-    
+
     contents[i].classList.add('catalog__content_active');
   });
 })
@@ -57,4 +60,61 @@ backToContentInfo.forEach((item, i) => {
     contentItemInfo[i].classList.add('catalog-item__content_active');
   });
 });
+
+// Modal window
+const overlay = document.querySelector('.overlay');
+
+function openModal(modalSelector) {
+  const modalWindow = document.querySelector(modalSelector);
+  
+  modalWindow.style.display = 'block';
+  overlay.style.display = 'block';
+  document.body.style.overflow = 'hidden'
+}
+
+function closeModal(modalSelector) {
+  const modalWindow = document.querySelector(modalSelector);
+
+  modalWindow.style.display = 'none';
+  overlay.style.display = 'none';
+  document.body.style.overflow = ''
+}
+
+function modal(triggerModal, modalSelector) {
+  const modalWindow = document.querySelector(modalSelector);
+  const triggerOpenModal = document.querySelectorAll(triggerModal);
+  const triggerClose = document.querySelectorAll('.modal__close');
+
+  triggerOpenModal.forEach((item, i) => {
+    item.addEventListener('click', () => {
+      if (item.classList.contains('button_mini')) {
+        document.querySelector('#name-product').textContent = document.querySelectorAll('.catalog-item__subtitle')[i].textContent; 
+        console.log(document.querySelectorAll('.catalog-item__subtitle')[i].textContent); 
+      }
+
+      openModal(modalSelector);
+      
+    });
+  });
+
+  triggerClose.forEach(item => {
+    item.addEventListener('click', () => closeModal(modalSelector));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === "Escape" && modalWindow.style.display !== 'none') {
+      closeModal(modalSelector);
+    }
+  })
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      closeModal(modalSelector);
+    }
+  });
+
+}
+
+modal('[data-modal="consultation"]', '#consultation');
+modal('.button_mini', '#order');
 
