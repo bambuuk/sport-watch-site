@@ -67,7 +67,7 @@ const scroll = calcScroll();
 
 function openModal(modalSelector) {
   const modalWindow = document.querySelector(modalSelector);
-  
+
   modalWindow.style.display = 'block';
   overlay.style.display = 'block';
   document.body.style.overflow = 'hidden';
@@ -92,12 +92,12 @@ function modal(triggerModal, modalSelector) {
   triggerOpenModal.forEach((item, i) => {
     item.addEventListener('click', () => {
       if (item.classList.contains('button_mini')) {
-        document.querySelector('#name-product').textContent = document.querySelectorAll('.catalog-item__subtitle')[i].textContent; 
-        console.log(document.querySelectorAll('.catalog-item__subtitle')[i].textContent); 
+        document.querySelector('#name-product').textContent = document.querySelectorAll('.catalog-item__subtitle')[i].textContent;
+        console.log(document.querySelectorAll('.catalog-item__subtitle')[i].textContent);
       }
 
       openModal(modalSelector);
-      
+
     });
   });
 
@@ -137,4 +137,37 @@ function calcScroll() {
 
 modal('[data-modal="consultation"]', '#consultation');
 modal('.button_mini', '#order');
+
+// Validation forms
+
+function valideForms(form) {
+  $(form).validate({
+    rules: {
+      name: {
+        required: true,
+        minlength: 2
+      },
+      phone: 'required',
+      email: {
+        required: true,
+        email: true
+      }
+    },
+    messages: {
+      name: {
+        required: "Пожалуйста, введите своё имя",
+        minlength: jQuery.validator.format("Введите {0} символа!")
+      },
+      phone: "Пожалуйста, введите свой номер телефона",
+      email: {
+        required: "Пожалуйста, введите свою почту",
+        email: "Неправильно введён адрес почты"
+      }
+    }
+  });
+}
+
+valideForms('#consultation-form');
+valideForms('#consultation form');
+valideForms('#order form');
 
