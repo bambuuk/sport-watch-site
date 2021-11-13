@@ -72,7 +72,6 @@ function openModal(modalSelector) {
   overlay.style.display = 'block';
   document.body.style.overflow = 'hidden';
   document.body.style.marginRight = `${scroll}px`;
-  console.log(scroll);
 }
 
 function closeModal(modalSelector) {
@@ -93,7 +92,6 @@ function modal(triggerModal, modalSelector) {
     item.addEventListener('click', () => {
       if (item.classList.contains('button_mini')) {
         document.querySelector('#name-product').textContent = document.querySelectorAll('.catalog-item__subtitle')[i].textContent;
-        console.log(document.querySelectorAll('.catalog-item__subtitle')[i].textContent);
       }
 
       openModal(modalSelector);
@@ -138,7 +136,7 @@ function calcScroll() {
 modal('[data-modal="consultation"]', '#consultation');
 modal('.button_mini', '#order');
 
-// Validation forms
+// Валидация форм
 
 function valideForms(form) {
   $(form).validate({
@@ -170,4 +168,8 @@ function valideForms(form) {
 valideForms('#consultation-form');
 valideForms('#consultation form');
 valideForms('#order form');
+
+// Маска ввода номера телефона
+
+$('[name="phone"]').mask("+38 (999) 99-99-999");
 
