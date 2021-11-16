@@ -95,7 +95,6 @@ function modal(triggerModal, modalSelector) {
       }
 
       openModal(modalSelector);
-
     });
   });
 
@@ -117,6 +116,30 @@ function modal(triggerModal, modalSelector) {
 
 }
 
+function thanksModalClose(modalSelector) {
+  const modalWindow = document.querySelector(modalSelector);
+  const triggerClose = document.querySelectorAll('.modal__close');
+  triggerClose.forEach(item => {
+    item.addEventListener('click', () => closeModal(modalSelector));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.code === "Escape" && modalWindow.style.display !== 'none') {
+      closeModal(modalSelector);
+    }
+  })
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      closeModal(modalSelector);
+    }
+  });
+}
+
+modal('[data-modal="consultation"]', '#consultation');
+modal('.button_mini', '#order');
+thanksModalClose('#thanks');
+
 // Функиця, которая создаёт отступ справа при вызове модального окна
 function calcScroll() {
   let div = document.createElement('div');
@@ -132,9 +155,6 @@ function calcScroll() {
 
   return scrollWidth;
 }
-
-modal('[data-modal="consultation"]', '#consultation');
-modal('.button_mini', '#order');
 
 // Валидация форм
 
@@ -171,7 +191,7 @@ valideForms('#order form');
 
 // Маска ввода номера телефона
 
-$('[name="phone"]').mask("+38 (999) 99-99-999");
+$('input[name=phone]').mask("+38 (999) 99-99-999");
 
 
 
@@ -179,6 +199,9 @@ $('[name="phone"]').mask("+38 (999) 99-99-999");
 
 $('form').submit(function(e) {
   e.preventDefault();
+  if (!$(this).valid()) {
+    return;
+  }
   $.ajax({
     type: "POST",
     url: "mailer/smart.php",
@@ -186,8 +209,26 @@ $('form').submit(function(e) {
   }).done(function() {
     $(this).find('input').val('');
     $('#consultation, #order').fadeOut();
-    $('.overlay, #thanks').fadeIn('slow')
+    $('.overlay, #thanks').fadeIn('slow');
     $('form').trigger('reset');
   });
   return false;
 });
+
+
+// Отображэение pageup картинки
+
+function showBtnScroll() {
+  const btnScroll = document.querySelector('.pageup');
+
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 1199) {
+      btnScroll.style.cssText = 'opacity: 1; visibility: visible';
+    } 
+    if(window.pageYOffset < 1199) {
+      btnScroll.style.cssText = 'opacity: 0; visibility: hidden';
+    }
+  });
+}
+
+showBtnScroll();
