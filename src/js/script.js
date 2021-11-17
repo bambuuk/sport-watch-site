@@ -232,3 +232,6 @@ function showBtnScroll() {
 }
 
 showBtnScroll();
+
+// Это запуск плагина wow.js
+new WOW().init();
